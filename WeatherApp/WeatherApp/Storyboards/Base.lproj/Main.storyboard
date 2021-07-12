@@ -24,21 +24,35 @@
             </objects>
             <point key="canvasLocation" x="114" y="94"/>
         </scene>
-        <!--Day-->
-        <scene sceneID="SOs-7p-Jhp">
+        <!--Day View Controller-->
+        <scene sceneID="flD-CE-7hP">
             <objects>
-                <viewControllerPlaceholder storyboardName="Day" id="kU3-RN-5fz" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="J3p-BL-MEP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <viewController storyboardIdentifier="DayViewController" id="qfM-O9-8v6" customClass="DayViewController" customModule="WeatherApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="mUw-Zq-TuG">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="kiV-0Z-f58"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rip-0p-sLh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="656" y="-26"/>
+            <point key="canvasLocation" x="894" y="94"/>
         </scene>
-        <!--Week-->
-        <scene sceneID="Z8b-L7-ZX6">
+        <!--Week View Controller-->
+        <scene sceneID="Hpo-GZ-Tcj">
             <objects>
-                <viewControllerPlaceholder storyboardName="Week" id="lTa-0X-B1Z" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0nE-OB-s5S" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <viewController storyboardIdentifier="WeekViewController" id="wUr-1k-QyP" customClass="WeekViewController" customModule="WeatherApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="uqt-Xq-l1z">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="IiM-QI-7eD"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kRD-Ex-GdR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="664" y="101"/>
+            <point key="canvasLocation" x="1738" y="81"/>
         </scene>
     </scenes>
     <resources>

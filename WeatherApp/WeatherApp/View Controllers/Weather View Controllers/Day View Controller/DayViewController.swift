@@ -2,7 +2,7 @@
 //  DayViewController.swift
 //  WeatherApp
 //
-//  Created by Decagon on 12/07/2021.
+//  Created by omokagbo on 12/07/2021.
 //
 
 import UIKit
