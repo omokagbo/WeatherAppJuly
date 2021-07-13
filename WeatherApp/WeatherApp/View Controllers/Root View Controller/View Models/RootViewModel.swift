@@ -9,7 +9,7 @@ import Foundation
 
 class RootViewModel {
     
-    typealias DidFetchWeatherCompletion = ((Data?, Error?) -> Void)
+    typealias DidFetchWeatherCompletion = ((OpenWeatherResponse?, Error?) -> Void)
     
     var didFetchWeatherData: DidFetchWeatherCompletion?
     
@@ -27,7 +27,14 @@ class RootViewModel {
             if let error = error {
                 self?.didFetchWeatherData?(nil, error)
             } else if let data = data {
-                self?.didFetchWeatherData?(data, nil)
+               let decoder = JSONDecoder()
+                do {
+                    let jsonData = try decoder.decode(OpenWeatherResponse.self, from: data)
+                    self?.didFetchWeatherData?(jsonData, nil)
+                } catch {
+                    debugPrint("unable to decode data \(error)")
+                    self?.didFetchWeatherData?(nil, error)
+                }
             } else {
                 self?.didFetchWeatherData?(nil, nil)
             }
