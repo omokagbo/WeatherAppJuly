@@ -11,6 +11,15 @@ final class RootViewController: UIViewController {
     
     // MARK: - Properties
     
+    var rootViewModel: RootViewModel? {
+        didSet {
+            guard let rootViewModel = rootViewModel else {
+                return
+            }
+            setupViewModel(with: rootViewModel)
+        }
+    }
+    
     private let dayViewController: DayViewController = {
         guard let dayViewController = UIStoryboard
                 .main
@@ -20,10 +29,8 @@ final class RootViewController: UIViewController {
         
         // configure day view controller
         dayViewController.view.translatesAutoresizingMaskIntoConstraints = false
-        
         return dayViewController
     }()
-    
     
     private let weekViewController: WeekViewController = {
         guard let weekViewController = UIStoryboard
@@ -43,9 +50,7 @@ final class RootViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupChildViewControllers()
-        fetchWeatherData()
     }
     
     private func setupChildViewControllers() {
@@ -56,7 +61,6 @@ final class RootViewController: UIViewController {
         view.addSubview(weekViewController.view)
         
         setupConstraintsForViews()
-        
     }
     
     private func setupConstraintsForViews() {
@@ -75,23 +79,14 @@ final class RootViewController: UIViewController {
         weekViewController.didMove(toParent: self)
     }
     
-    private func fetchWeatherData() {
-        guard let baseUrl = URL(string: BaseUrl.urlString),
-              let urlWithLocation = URL(string: "lat=\(Locations.Ososo.lat.rawValue)&lon=\(Locations.Ososo.lon.rawValue)&exclude=hourly"),
-              let authenticatedUrl = URL(string: "&appid=\(APIKey.development.rawValue)") else {
-            return
-        }
-        guard let url = URL(string: "\(baseUrl)\(urlWithLocation)\(authenticatedUrl)") else {
-            return
-        }
-        
-        URLSession.shared.dataTask(with: url) { data, response, error in
+    private func setupViewModel(with: RootViewModel) {
+        rootViewModel?.didFetchWeatherData = {(data, error) in
             if let error = error {
-                debugPrint("error, \(error.localizedDescription)")
-            } else if let response = response {
-                debugPrint("response, \(response)")
+                print("unable to fetch weather data, \(error)")
+            } else if let data = data {
+                print("data, \(data)")
             }
-        }.resume()
+        }
     }
     
 }
