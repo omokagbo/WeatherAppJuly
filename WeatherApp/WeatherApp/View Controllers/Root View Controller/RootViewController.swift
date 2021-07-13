@@ -35,7 +35,6 @@ final class RootViewController: UIViewController {
         // configure week view controller
         weekViewController.view.translatesAutoresizingMaskIntoConstraints = false
         
-        
         return weekViewController
     }()
     
@@ -44,14 +43,9 @@ final class RootViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
         
-        // setup child view controllers
         setupChildViewControllers()
-    }
-    
-    private func setupView() {
-        view.backgroundColor = .systemIndigo
+        fetchWeatherData()
     }
     
     private func setupChildViewControllers() {
@@ -62,6 +56,7 @@ final class RootViewController: UIViewController {
         view.addSubview(weekViewController.view)
         
         setupConstraintsForViews()
+        
     }
     
     private func setupConstraintsForViews() {
@@ -78,6 +73,25 @@ final class RootViewController: UIViewController {
         weekViewController.view.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         weekViewController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         weekViewController.didMove(toParent: self)
+    }
+    
+    private func fetchWeatherData() {
+        guard let baseUrl = URL(string: BaseUrl.urlString),
+              let urlWithLocation = URL(string: "lat=\(Locations.Ososo.lat.rawValue)&lon=\(Locations.Ososo.lon.rawValue)&exclude=hourly"),
+              let authenticatedUrl = URL(string: "&appid=\(APIKey.development.rawValue)") else {
+            return
+        }
+        guard let url = URL(string: "\(baseUrl)\(urlWithLocation)\(authenticatedUrl)") else {
+            return
+        }
+        
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            if let error = error {
+                debugPrint("error, \(error.localizedDescription)")
+            } else if let response = response {
+                debugPrint("response, \(response)")
+            }
+        }.resume()
     }
     
 }
