@@ -7,48 +7,48 @@
 
 import Foundation
 
-public struct OpenWeatherResponse: Codable {
-    public let lat: Double?
-    public let lon: Double?
-    public let current: CurrentWeather?
-    public let daily: [DailyWeather]?
+struct OpenWeatherResponse: Codable {
+    let lat: Double?
+    let lon: Double?
+    let current: CurrentWeather?
+    let daily: [DailyWeather]?
 }
 
-public struct CurrentWeather: Codable {
-    public let dt: Int?
-    public let temp: Double?
-    public let clouds: Int?
-    public let wind_speed: Double?
-    public let weather: [Weather]?
+struct CurrentWeather: Codable {
+    let dt: Int?
+    let temp: Double?
+    let clouds: Int?
+    let wind_speed: Double?
+    let weather: [Weather]?
 }
 
-public struct Weather: Codable {
-    public let id: Int?
-    public let main: String?
-    public let description: String?
-    public let icon: String?
+struct Weather: Codable {
+    let id: Int?
+    let main: String?
+    let description: String?
+    let icon: String?
 }
 
-public struct DailyWeather: Codable {
-    public let dt: Int?
-    public let temp: DailyWeatherTemp?
-    public let wind_speed: Double?
-    public let weather: [DailyWeatherDescription]?
-    public let clouds: Int?
+struct DailyWeather: Codable {
+    let dt: Int?
+    let temp: DailyWeatherTemp?
+    let wind_speed: Double?
+    let weather: [DailyWeatherDescription]?
+    let clouds: Int?
 }
 
-public struct DailyWeatherTemp: Codable {
-    public let day: Double?
-    public let min: Double?
-    public let max: Double?
-    public let night: Double?
-    public let eve: Double?
-    public let morn: Double?
+struct DailyWeatherTemp: Codable {
+    let day: Double?
+    let min: Double?
+    let max: Double?
+    let night: Double?
+    let eve: Double?
+    let morn: Double?
 }
 
-public struct DailyWeatherDescription: Codable {
-    public let id: Int?
-    public let main: String?
-    public let description: String?
-    public let icon: String?
+struct DailyWeatherDescription: Codable {
+    let id: Int?
+    let main: String?
+    let description: String?
+    let icon: String?
 }

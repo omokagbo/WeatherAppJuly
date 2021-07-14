@@ -9,7 +9,11 @@ import Foundation
 
 class RootViewModel {
     
-    typealias DidFetchWeatherCompletion = ((Data?, Error?) -> Void)
+    enum WeatherDataError: Error {
+        case noWeatherDataAvailable
+    }
+    
+    typealias DidFetchWeatherCompletion = (OpenWeatherResponse?, WeatherDataError?) -> Void
     
     var didFetchWeatherData: DidFetchWeatherCompletion?
     
@@ -23,13 +27,21 @@ class RootViewModel {
             return
         }
         
-        URLSession.shared.dataTask(with: url) {[weak self] data, response, error in
+        URLSession.shared.dataTask(with: url) {[weak self] (data, response, error) in
             if let error = error {
-                self?.didFetchWeatherData?(nil, error)
+                print(error)
+                self?.didFetchWeatherData?(nil, .noWeatherDataAvailable)
             } else if let data = data {
-                self?.didFetchWeatherData?(data, nil)
+               let decoder = JSONDecoder()
+                do {
+                    let decodedData = try decoder.decode(OpenWeatherResponse.self, from: data)
+                    self?.didFetchWeatherData?(decodedData, nil)
+                } catch {
+                    print("unable to decode data \(error)")
+                    self?.didFetchWeatherData?(nil, .noWeatherDataAvailable)
+                }
             } else {
-                self?.didFetchWeatherData?(nil, nil)
+                self?.didFetchWeatherData?(nil, .noWeatherDataAvailable)
             }
         }.resume()
     }
