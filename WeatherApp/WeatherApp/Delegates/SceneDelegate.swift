@@ -21,7 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             fatalError("Unexpected Root View Controller")
         }
         let rootViewModel = RootViewModel()
-        rootViewController.rootViewModel = rootViewModel
+        rootViewController.viewModel = rootViewModel
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
